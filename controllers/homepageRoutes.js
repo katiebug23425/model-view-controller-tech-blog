@@ -68,7 +68,36 @@ router.get("/post/:id", async (req, res) => {
     }
 });
 
+// Route to render dashboard page with all posts by current user
+router.get("/dashboard", async (req, res) => {
+    try {
+        const dbPostData = await Post.findAll({
+            where: { user_id: req.session.user_id },
+            attributes: ["id", "title", "content", "created_at"],
+            include: [
+                {
+                    model: User,
+                    attributes: ["username"],
+                },
+                {
+                    model: Comment,
+                    attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+                    include: {
+                        model: User,
+                        attributes: ["username"],
+                    },
+                },
+            ],
+        });
 
+        const posts = dbPostData.map((post) => post.get({ plain: true }));
+
+        res.render("dashboard", { posts });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Request for all posts from user unable to be fulfilled, posts not found!" });
+    }
+});
 
 // module exports router
 module.exports = router;
