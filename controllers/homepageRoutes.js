@@ -99,5 +99,41 @@ router.get("/dashboard", async (req, res) => {
     }
 });
 
+//render the edit post page
+router.get("/edit/:id", async (req, res) => {
+    try {
+        const dbPostData = await Post.findOne({
+            where: { id: req.params.id },
+            attributes: ["id", "title", "content", "created_at"],
+            include: [
+                {
+                    model: User,
+                    attributes: ["username"],
+                },
+                {
+                    model: Comment,
+                    attributes: ["id", "comment_text", "post_id", "user_id", "created_at"],
+                    include: {
+                        model: User,
+                        attributes: ["username"],
+                    },
+                },
+            ],
+        });
+
+        if (!dbPostData) {
+            res.status(404).json({ message: "Request for post unable to be fulfilled, post not found!" });
+            return;
+        }
+
+        const post = dbPostData.get({ plain: true });
+
+        res.render("edit-post", { post });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: "Request for post unable to be fulfilled, post not found!" });
+    }
+});
+
 // module exports router
 module.exports = router;
