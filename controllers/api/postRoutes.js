@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { Post, User, Comment } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // Get all posts with associated username
 router.get("/", async (req, res) => {
@@ -63,9 +64,59 @@ router.get("/:id", async (req, res) => {
     }
   });
 
+  // Create a new post with authenticated user
+router.post("/", withAuth, async (req, res) => {
+    try {
+      const dbPostData = await Post.create({
+        title: req.body.title,
+        content: req.body.content,
+        user_id: req.session.user_id,
+      });
   
+      res.status(200).json(dbPostData);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Request to create a new post failed!" });
+    }
+  });
 
+  // Update a post by ID with authenticated user
+router.put("/:id", withAuth, async (req, res) => {
+    try {
+      const dbPostData = await Post.update(req.body, {
+        where: { id: req.params.id },
+      });
+  
+      if (!dbPostData[0]) {
+        res.status(404).json({ message: "Request to update post failed, post not found!" });
+        return;
+      }
+  
+      res.status(200).json(dbPostData);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Request to update post failed!" });
+    }
+  });
 
+  // Delete a post by ID with authenticated user
+router.delete("/:id", withAuth, async (req, res) => {
+    try {
+      const dbPostData = await Post.destroy({
+        where: { id: req.params.id },
+      });
+  
+      if (!dbPostData) {
+        res.status(404).json({ message: "Request to delete post failed, post not found!" });
+        return;
+      }
+  
+      res.status(200).json(dbPostData);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({ message: "Request to delete post failed!" });
+    }
+  });
 
 // Export the router
 module.exports = router;
