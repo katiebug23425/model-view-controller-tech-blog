@@ -38,7 +38,7 @@ router.post("/", async (req, res) => {
   // Route to login a current user
 router.post("/login", async (req, res) => {
     try {
-      const dbUserData = await User.findOne({
+      const dbUserData = await User.findByPk({
         where: {
           username: req.body.username,
         },

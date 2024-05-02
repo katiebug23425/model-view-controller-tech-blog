@@ -33,7 +33,7 @@ router.get("/", async (req, res) => {
   // Get single post by ID with associated username and comments
 router.get("/:id", async (req, res) => {
     try {
-      const dbPostData = await Post.findOne({
+      const dbPostData = await Post.findByPk({
         where: { id: req.params.id },
         attributes: ["id", "title", "content", "created_at"],
         include: [
