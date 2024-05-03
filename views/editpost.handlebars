@@ -1,0 +1,30 @@
+<main class="container mt-5">
+  <h1 class="mb-4 text-center">Edit Post</h1>
+  <form class="update-tech-blog-post-form" class="mb-3">
+    <div class="mb-3">
+      <label for="title-update-tech-blog-post" class="form-label">Updated Title:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="title-update-tech-blog-post"
+        placeholder="{Please enter a new title for your post.}"
+        value="{{title}}"
+      />
+    </div>
+    <div class="mb-3">
+      <label for="content-update-tech-blog-post" class="form-label">Updated Content:</label>
+      <textarea
+        class="form-control"
+        id="content-update-tech-blog-post"
+        placeholder="Please enter new content for your post."
+        rows="10"
+      >{{content}}</textarea>
+    </div>
+    button
+       </div>
+
+    <button type="submit" id="update-tech-blog-post" class="btn btn-primary">Update Post</button>
+    <button type="button" id="delete-tech-blog-post" class="btn btn-danger">Delete Post</button>
+    
+  </form>
+</main>
