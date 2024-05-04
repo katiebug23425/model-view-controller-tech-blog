@@ -8,9 +8,7 @@ const post_id = window.location.toString().split("/")[
 
     
     const title = document.querySelector("#title-update-tech-blog-post").value.trim();
-    const content = document
-      .querySelector("#content-update-tech-blog-post")
-      .value.trim();
+    const content = document.querySelector("#content-update-tech-blog-post").value.trim();
 
     if (title && content) {
         const response = await fetch(`/api/posts/${post_id}`, {
