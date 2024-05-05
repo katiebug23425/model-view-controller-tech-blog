@@ -3,15 +3,16 @@ const router = require("express").Router();
 const { User } = require("../../models");
 
 // GET all users
-router.get("/", (req, res) => {
-  User.findAll({
-    attributes: { exclude: ["password"] },
-  })
-    .then((dbUserData) => res.json(dbUserData))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ message: "Request for all users unable to be fulfilled, users not found!"});
+router.get("/", async (req, res) => {
+  try {
+    const dbUserData = await User.findAll({
+      attributes: { exclude: ["password"] },
     });
+    res.json(dbUserData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: "Request for all users unable to be fulfilled, users not found!" });
+  }
 });
 
 // New User Signup Route
