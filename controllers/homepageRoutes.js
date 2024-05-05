@@ -7,7 +7,7 @@ const withAuth = require("../utils/auth");
 router.get("/", async (req, res) => {
     try {
         const dbPostData = await Post.findAll({
-            attributes: ["id", "title", "content", "created_at"],
+            attributes: ["id", "title", "post_text", "created_at"],
             include: [
                 {
                     model: User,
@@ -38,7 +38,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
     try {
         const dbPostData = await Post.findByPk({
             where: { id: req.params.id },
-            attributes: ["id", "title", "content", "created_at"],
+            attributes: ["id", "title", "post_text", "created_at"],
             include: [
                 {
                     model: User,
@@ -74,7 +74,7 @@ router.get("/dashboard", withAuth, async (req, res) => {
     try {
         const dbPostData = await Post.findAll({
             where: { user_id: req.session.user_id },
-            attributes: ["id", "title", "content", "created_at"],
+            attributes: ["id", "title", "post_text", "created_at"],
             include: [
                 {
                     model: User,
@@ -127,12 +127,11 @@ router.get("/login", (req, res) => {
     res.redirect("/login");
   });
 
-//render the edit post page
+// Route to render the edit post page
 router.get("/edit/:id", async (req, res) => {
     try {
-        const dbPostData = await Post.findByPk({
-            where: { id: req.params.id },
-            attributes: ["id", "title", "content", "created_at"],
+        const dbPostData = await Post.findByPk(req.params.id, {
+            attributes: ["id", "title", "post_text", "created_at"],
             include: [
                 {
                     model: User,
@@ -155,11 +154,10 @@ router.get("/edit/:id", async (req, res) => {
         }
 
         const post = dbPostData.get({ plain: true });
-
-        res.render("edit-post", { post, logged_in: req.session.logged_in, });
+        res.render("edit-post", { post, logged_in: req.session.logged_in });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ message: "Request to edit post unable to be fulfilled, post not found!" });
+        res.status(500).json({ message: "Request to edit post unable to be fulfilled, an error occurred!" });
     }
 });
 
