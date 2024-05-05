@@ -17,17 +17,18 @@ router.get("/", (req, res) => {
 // New User Signup Route
 router.post("/signup", async (req, res) => {
     try {
-      const dbUserData = await User.create({
-        username: req.body.username,
-        password: req.body.password,
-      });
+      const dbNewUserData = new User();
+      dbNewUserData.username = req.body.username;
+      dbNewUserData.email = req.body.email;
+      dbNewUserData.password = req.body.password;
   
-      req.session.user_id = dbUserData.id;
-      req.session.username = dbUserData.username;
-      req.session.loggedIn = true;
-  
+      const userData = await dbNewUserData.save();
+
       req.session.save(() => {
-        res.json(dbUserData);
+        req.session.user_id = userData.id;
+        req.session.logged_in = true;
+  
+        res.status(200).json(userData);
       });
     } catch (err) {
       console.log(err);
@@ -38,11 +39,7 @@ router.post("/signup", async (req, res) => {
   // Route to login a current user
 router.post("/login", async (req, res) => {
     try {
-      const dbUserData = await User.findOne({
-        where: {
-          username: req.body.username,
-        },
-      });
+      const dbUserData = await User.findOne({ where: {username: req.body.username,}});
   
       if (!dbUserData) {
         res
