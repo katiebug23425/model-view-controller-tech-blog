@@ -38,7 +38,7 @@ router.get("/post/:id", withAuth, async (req, res) => {
     try {
         const dbPostData = await Post.findByPk({
             where: { id: req.params.id },
-            attributes: ["id", "title", "post_text", "created_at"],
+            attributes: ["id", "title", "content", "created_at"],
             include: [
                 {
                     model: User,
@@ -62,7 +62,10 @@ router.get("/post/:id", withAuth, async (req, res) => {
 
         const post = dbPostData.get({ plain: true });
 
-        res.render("single-post", { post,  logged_in: req.session.logged_in, });
+        res.render("post", {
+            ...post,
+            logged_in: req.session.logged_in,
+          });
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Request for post unable to be fulfilled, post not found!" });
