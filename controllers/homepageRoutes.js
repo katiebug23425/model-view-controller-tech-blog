@@ -94,9 +94,12 @@ router.get("/dashboard", withAuth, async (req, res) => {
             ],
         });
 
-        const posts = dbPostData.map((post) => post.get({ plain: true }));
-
-        res.render("dashboard", { posts, logged_in: req.session.logged_in, });
+        if (dbPostData.length > 0) {
+            const posts = dbPostData.map((post) => post.get({ plain: true }));
+            res.render("dashboard", { posts, logged_in: req.session.logged_in });
+        } else {
+            res.render("dashboard", { message: "You have no posts yet. Start creating your first post!", logged_in: req.session.logged_in });
+        }
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Request for all posts from user unable to be fulfilled, posts not found!" });
