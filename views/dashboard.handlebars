@@ -12,7 +12,7 @@
   <div class="text-center"> 
     {{#each posts}}
       <div class="post-container post mb-3">
-        <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
+        <h2><a href="/post/{{id}}" class="text-decoration-none text-reset"><span style="color: red;">{{title}}</span></a></h2>
         <p>Created by: {{user.username}} | Date: {{format_date created_at}}</p>
         <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
         <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete Post</button>

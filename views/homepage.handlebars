@@ -6,12 +6,12 @@
                 <div class="card mb-3">
                     <div class="card-header bg-primary">
                         <h2 class="card-title">
-                            <a href="/post/{{id}}" class="text-dark">{{title}}</a>
+                            <a href="/post/{{id}}" class="text-dark"><strong>{{title}}</strong></a>
                         </h2>
                     </div>
                     <div class="card-body text-dark">
-                        <p>Created by: {{user.username}} Date: {{format_date created_at}}</p>
-                        <p>{{content}}</p>
+                        <p><strong>Created By: </strong>{{user.username}}<strong> Date: </strong>{{format_date created_at}}</p>
+                        <p><em>{{content}}</em></p>
                     </div>
                 </div>
             </div>
