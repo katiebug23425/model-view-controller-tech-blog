@@ -9,12 +9,14 @@
   </div>
   <br>
   <h1 class="mb-4 text-center">Your Tech Blog Posts:</h1>
-  {{#each posts}}
-    <div class="post-container post mb-3">
-      <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
-      <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
-      <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
-      <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete Post</button>
-    </div>
-  {{/each}}
+  <div class="text-center"> 
+    {{#each posts}}
+      <div class="post-container post mb-3">
+        <h2><a href="/post/{{id}}" class="text-decoration-none text-reset">{{title}}</a></h2>
+        <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
+        <a href="/editpost/{{id}}" class="btn btn-warning">Edit Post</a>
+        <button class="btn btn-danger delete-post" data-post-id="{{id}}">Delete Post</button>
+      </div>
+    {{/each}}
+  </div> 
 </main>
