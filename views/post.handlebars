@@ -1,7 +1,7 @@
 <main class="container mt-5">
   <article>
     <h1>{{title}}</h1>
-    <p>Created by: {{user.username}} | Date: {{format_date createdAt}}</p>
+    <p>Created by: {{user.username}} | Date: {{format_date created_at}}</p>
     <p>{{content}}</p>
   </article>
   {{#if logged_in}}
@@ -22,7 +22,7 @@
   {{#each comments}}
     <div class="comment mb-3">
       <p>{{comment_text}}</p>
-      <p>By {{user.username}} on {{format_date createdAt}}</p>
+      <p>By {{user.username}} on {{format_date created_at}}</p>
     </div>
   {{/each}}
 </main>
