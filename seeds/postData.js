@@ -4,7 +4,7 @@ const postData = [
   { id: 1,
     title: "HTML Basics",
     content: "This is a blog about html basics, including tags, elements, and attributes.",
-    user_id: 6,
+    user_id: 5,
   },
   { id: 2,
     title: "CSS Basics",
