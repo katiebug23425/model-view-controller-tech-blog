@@ -13,6 +13,7 @@ const newTechBlogCommentFormHandler = async (event) => {
       });
   
       if (response.ok) {
+        console.log("response: ", response)
         document.location.reload();
       } else {
         alert('Failed to create comment');

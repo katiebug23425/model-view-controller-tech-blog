@@ -19,7 +19,7 @@ const commentData = [
   { id: 4,
     comment_text: "Follow up post please!",
     user_id: 4,
-    post_id: 1,
+    post_id: 4,
   },
   { id: 5,
     comment_text: "I disagree with you!",
