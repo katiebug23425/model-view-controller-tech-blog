@@ -36,7 +36,7 @@ router.get("/", async (req, res) => {
 // Route to render individual post page
 router.get("/post/:id", withAuth, async (req, res) => {
     try {
-        const dbPostData = await Post.findByPk({
+        const dbPostData = await Post.findOne({
             where: { id: req.params.id },
             attributes: ["id", "title", "content", "created_at"],
             include: [
