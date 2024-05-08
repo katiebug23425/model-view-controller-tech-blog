@@ -18,8 +18,9 @@ const newTechBlogPostFormHandler = async (event) => {
       }
     }
 
-    const newTechBlogPostForm = document.querySelector('.new-tech-blog-post-form');
-    if (newTechBlogPostForm) {
-  newTechBlogPostForm.addEventListener('submit', newTechBlogPostFormHandler);
-}
 };
+
+const newTechBlogPostForm = document.querySelector('.new-tech-blog-post-form');
+if (newTechBlogPostForm) {
+newTechBlogPostForm.addEventListener('submit', newTechBlogPostFormHandler);
+}

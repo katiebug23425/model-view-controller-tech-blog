@@ -134,7 +134,7 @@ router.get("/login", (req, res) => {
   });
 
 // Route to render the edit post page
-router.get("/edit/:id", async (req, res) => {
+router.get("/editpost/:id", async (req, res) => {
     try {
         const dbPostData = await Post.findByPk(req.params.id, {
             attributes: ["id", "title", "content", "created_at"],
@@ -160,7 +160,7 @@ router.get("/edit/:id", async (req, res) => {
         }
 
         const post = dbPostData.get({ plain: true });
-        res.render("edit-post", { post, logged_in: req.session.logged_in });
+        res.render("editpost", { post, logged_in: req.session.logged_in });
     } catch (err) {
         console.log(err);
         res.status(500).json({ message: "Request to edit post unable to be fulfilled, an error occurred!" });
