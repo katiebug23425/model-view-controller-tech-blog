@@ -1,9 +1,11 @@
 <main class="container mt-5">
-  <article>
-    <h1>{{title}}</h1>
-    <p>Created by: {{user.username}} | Date: {{format_date created_at}}</p>
-    <p>{{content}}</p>
-  </article>
+  <div class="text-center">
+    <article>
+      <h1>{{title}}</h1>
+      <p>Created by: {{user.username}} | Date: {{format_date created_at}}</p>
+      <p>{{content}}</p>
+    </article>
+  </div>
   {{#if logged_in}}
     <form class="new-tech-blog-comment-form" class="mb-3">
       <div class="mb-3">
@@ -18,11 +20,15 @@
       <button type="submit" class="btn btn-success">Submit</button>
     </form>
   {{/if}}
-  <h2>Comment History:</h2>
-  {{#each comments}}
-    <div class="comment mb-3">
-      <p>{{comment_text}}</p>
-      <p>By {{user.username}} on {{format_date created_at}}</p>
-    </div>
-  {{/each}}
+  <div class="text-center">
+    <h2>Comment History:</h2>
+  </div>
+  <div class="text-center">
+    {{#each comments}}
+      <div class="comment mb-3">
+        <p class="comment-text" style="color: yellow;">{{comment_text}}</p>
+        <p>By {{user.username}} on {{format_date created_at}}</p>
+      </div>
+    {{/each}}
+  </div>
 </main>

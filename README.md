@@ -14,4 +14,5 @@ Katie Rose's Tech Talk is a Heroku deployed application that serves as a CMS sty
 ## Link to deployed app:
 
 ## Credits:
+Tutor Joem Mervyll
 Xpert Learning Asst
