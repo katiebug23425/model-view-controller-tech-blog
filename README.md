@@ -10,6 +10,8 @@ Katie Rose's Tech Talk is a Heroku deployed application that serves as a CMS sty
 ## Screenshots:
 
 ![screenshot for mvc tech talk application](./public/images/tech%20talk%20homepage%20screenshot.png)
+![screenshot 2 for mvc tech talk application](./public/images/mvc%20dashboard%20screenshot.png)
+![screenshot 3 for mvc tech talk application](./public/images/comment%20screenshot%20mvc.png)
 
 ## Link to deployed app:
 
